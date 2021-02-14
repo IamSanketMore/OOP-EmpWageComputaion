@@ -1,49 +1,46 @@
 public class EmpWageComputation
 {
-	public static final int isFullTime=1;
-	public static final int isPartTime=2;
-	public static final int EmpRatePerHour=20;
-	public static final int NumOfWorkingDays=20;
-	public static final int MaxHrsInMonth=100;
+        public static final int FULL_TIME=1;
+        public static final int PART_TIME=2;
 
-	public void calEmpWagePerMonth()
+        public static void ComputeEmpWage(String company,int empRatePerHr,int numOfWorkingDays,int maxWorkingHrs)
         {
-		int EmpHrs=0;
-		int EmpWage=0;
-		int TotalEmpWage=0;
-		int TotalEmpHrs=0;
-		int TotalWorkingDays=0;
-		while(TotalEmpHrs <= MaxHrsInMonth && TotalWorkingDays < NumOfWorkingDays)
-		{
+                int empHrs=0;
+                int totalEmpWage=0;
+                int empWage=0;
+                int totalEmpHrs=0;
+                int totalWorkingDays=0;
 
-			TotalWorkingDays++;
-                	int empCheck = (int)Math.floor(Math.random() *10) % 3;
-                	switch(empCheck)
-			{
-				case isFullTime :
-					System.out.println("Employee Is Full Time");
-					EmpHrs=8;
-					break;
+                while(totalEmpHrs<=maxWorkingHrs && totalWorkingDays<=numOfWorkingDays)
+                {
+                        totalWorkingDays++;
+                        int empCheck=(int)Math.floor(Math.random()*10)%3;
 
-				case isPartTime:
-					System.out.println("Employee is Part Time");
-					EmpHrs=4;
-					break;
+                        switch(empCheck)
+                        {
+                                case FULL_TIME:
+                                empHrs=8;
+                                break;
 
-				default:
-					System.out.println("Employee Is Absent");
-					break;
-			}
-			TotalEmpHrs += EmpHrs;
-			System.out.println("Day:"+TotalWorkingDays+ "Emp Hr:"+EmpHrs);
-        	 }
-		TotalEmpWage=TotalEmpHrs * EmpRatePerHour;
-		System.out.println("Total EmpWage:" + TotalEmpWage);
-	}
+                                case PART_TIME:
+                                empHrs=4;
+                                break;
 
-	public static void  main(String args [])
-	{
-		EmpWageComputation emp = new EmpWageComputation();
-		emp.calEmpWagePerMonth();
-	}
+                                default:
+                                empHrs=0;
+                        }
+                        totalEmpHrs+=empHrs;
+                }
+                totalEmpWage=totalEmpHrs*empRatePerHr;
+                System.out.println("Company: "+company+" :: Total Employee Wage: "+totalEmpWage);
+
+        }
+
+        public static void main(String args [])
+        {
+                ComputeEmpWage("Facebook",14,34,52);
+                ComputeEmpWage("Google",24,35,34);
+                ComputeEmpWage("Twitter",12,30,45);
+        }
+
 }
