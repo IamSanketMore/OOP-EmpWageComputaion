@@ -10,19 +10,21 @@ public class EmpWageComputation
 		int EmpWage=0;
 
                 int empCheck = (int)Math.floor(Math.random() *10) % 3;
-                if(empCheck == isFullTime)
+                switch(empCheck)
 		{
-			System.out.println("Employee Is Full Time");
-			EmpHrs=8;
-		}
-		else if (empCheck == isPartTime)
-		{
-			System.out.println("Employee is Part Time");
-			EmpHrs=4;
-		}
-		else
-		{
-			System.out.println("Employee Is Absent");
+			case isFullTime :
+				System.out.println("Employee Is Full Time");
+				EmpHrs=8;
+				break;
+
+			case isPartTime:
+				System.out.println("Employee is Part Time");
+				EmpHrs=4;
+				break;
+
+			default:
+				System.out.println("Employee Is Absent");
+				break;
 		}
 		EmpWage =EmpHrs * EmpRatePerHour;
 		System.out.println("Employee Wage:- "+EmpWage);
