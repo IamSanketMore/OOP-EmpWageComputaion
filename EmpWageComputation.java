@@ -3,15 +3,14 @@ public class EmpWageComputation
         public static final int FULL_TIME=1;
         public static final int PART_TIME=2;
 
-        public static void ComputeEmpWage(String company,int empRatePerHr,int numOfWorkingDays,int maxWorkingHrs)
+        public static int ComputeEmpWage(String company,int empRatePerHr,int numOfWorkingDays,int maxHoursPerMonth)
         {
                 int empHrs=0;
                 int totalEmpWage=0;
-                int empWage=0;
                 int totalEmpHrs=0;
                 int totalWorkingDays=0;
 
-                while(totalEmpHrs<=maxWorkingHrs && totalWorkingDays<=numOfWorkingDays)
+                while(totalEmpHrs<=maxHoursPerMonth && totalWorkingDays<=numOfWorkingDays)
                 {
                         totalWorkingDays++;
                         int empCheck=(int)Math.floor(Math.random()*10)%3;
@@ -30,10 +29,12 @@ public class EmpWageComputation
                                 empHrs=0;
                         }
                         totalEmpHrs+=empHrs;
+			System.out.println("Day#:"+ totalWorkingDays + " Emp Hr:"+empHrs);
                 }
-                totalEmpWage=totalEmpHrs*empRatePerHr;
+                totalEmpWage = totalEmpHrs * empRatePerHr;
                 System.out.println("Company: "+company+" :: Total Employee Wage: "+totalEmpWage);
 
+		return totalEmpWage;
         }
 
         public static void main(String args [])
