@@ -1,23 +1,49 @@
-public class EmpWageComputation
+class CompanyWage
 {
-	public static final int FULL_TIME=1;
-	public static final int PART_TIME=2;
+	public String company;
+	public int empRatePerHour;
+	public int numOfWorkingDays;
+	public int maxHoursPerMonth;
+	public int  totalEmpWage;
+	public int fullTimeHr;
+    public int partTimeHr;
 
-	private final String company;
-	private final int empRatePerHour;
-	private final int numOfWorkingDays;
-	private final int maxHoursPerMonth;
-	private int totalEmpWage;
 
-	public EmpWageComputation(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+	public CompanyWage(String company, int empRatePerHour, int numOfWorkingDays, 
+						int maxHoursPerMonth,int fullTimeHr, int partTimeHr)
 	{
 		this.company = company;
 		this.empRatePerHour = empRatePerHour;
 		this.numOfWorkingDays = numOfWorkingDays;
 		this.maxHoursPerMonth = maxHoursPerMonth;
-
+		this.fullTimeHr = fullTimeHr;
+     		this.partTimeHr = partTimeHr;
 	}
-	public void ComputeEmpWage()
+
+}
+
+class EmpWageArray
+{
+	public static final int FULL_TIME=1;
+	public static final int PART_TIME=2;
+
+	private int numOfCompany = 0;
+	private CompanyWage[] companyEmpWageArray;
+	
+	public EmpWageArray()
+	{
+		companyEmpWageArray = new CompanyWage[5];
+	}
+	public void addCompanyEmpWage(String company, int empRatePerHour,int numOfWorkingDays, int maxHoursPerMonth,int fullTimeHr, int partTimeHr)
+	{
+		companyEmpWageArray[numOfCompany] = new CompanyWage(company,empRatePerHour,numOfWorkingDays,maxHoursPerMonth,fullTimeHr,partTimeHr);
+		ComputeEmpWage(companyEmpWageArray[numOfCompany].company,companyEmpWageArray[numOfCompany].empRatePerHour,
+				companyEmpWageArray[numOfCompany].numOfWorkingDays,companyEmpWageArray[numOfCompany].maxHoursPerMonth,
+				companyEmpWageArray[numOfCompany].fullTimeHr,companyEmpWageArray[numOfCompany].partTimeHr);
+		numOfCompany++;
+	}
+
+	public void ComputeEmpWage(String company,int empRatePerHour,int numOfWorkingDays , int maxHoursPerMonth, int fullTimeHr, int partTimeHr)
 	{
 		int empHrs=0;
 		int totalEmpWage=0;
@@ -48,19 +74,14 @@ public class EmpWageComputation
 		totalEmpWage = totalEmpHrs * empRatePerHour;
 		System.out.println("Total Wage For " +company+ " Company Employee Is "+totalEmpWage );
 	}
-
-	@Override
-	public String toString()
-	{
-		return "Total EmpWage for Company:"+company+ "is:"+totalEmpWage;
-	}
-
-	public static void main(String args [])
-	{
-		EmpWageComputation fb = new EmpWageComputation("Facebook",14,34,52);
-		fb.ComputeEmpWage();
-		EmpWageComputation go = new EmpWageComputation("Google",24,35,34);
-		go.ComputeEmpWage();
-	}
-
 }
+	public class EmpWageComputation
+	{
+		public static void main(String args [])
+		{
+			EmpWageArray emp = new EmpWageArray();
+			//EmpWageArry obj = new EmpWageArry();
+	        emp.addCompanyEmpWage("Facebook",14,34,52,5,7);
+	        emp.addCompanyEmpWage("Google",24,35,34,4,6);
+		}
+	}
